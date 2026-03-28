@@ -158,13 +158,52 @@ pip install -r requirements.txt
 
 > If PowerShell blocks activation: ``Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass``
 
-### 2. Hugging Face authentication (if required)
+> **⚠️ Python 3.13 — `llama-cpp-python` build error**
+> 
+> If you get the following error:
+> ```
+> CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
+> ERROR: Failed building wheel for llama-cpp-python
+> ```
+> This means no pre-compiled wheel exists for your Python version (3.13 is not yet fully supported).
+> 
+> **Fix — use the official pre-compiled CPU wheels:**
+> ```bash
+> pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+> ```
+> 
+> **Alternative — install a supported Python version (recommended: 3.11 or 3.12):**
+> ```bash
+> # Create a new venv with Python 3.11 or 3.12
+> py -3.11 -m venv .venv
+> .\.venv\Scripts\Activate.ps1
+> pip install -r requirements.txt
+> ```
+> 
+> **Alternative — install the Visual C++ Build Tools** (allows local compilation):  
+> Download from [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/) and select **"Desktop development with C++"**.
 
-Some models require a Hugging Face account:
+### 2. Hugging Face authentication — Gated models
+
+Several models used in this project are **gated** on Hugging Face, meaning you must explicitly request access before downloading them:
+
+| Model | Access request page |
+|---|---|
+| `google/gemma-7b-it` | [https://huggingface.co/google/gemma-7b-it](https://huggingface.co/google/gemma-7b-it) |
+| `meta-llama/Llama-3.2-3B-Instruct` | [https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct) |
+
+**Steps:**
+1. Create a [Hugging Face account](https://huggingface.co/join) if you don't have one
+2. Go to each model page above, accept the license agreement
+3. Generate an access token at [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) (type: **Read**)
+4. Authenticate locally:
 
 ```bash
 huggingface-cli login
+# paste your token when prompted
 ```
+
+> **⚠️ Without this step**, loading `gemma-7b-it` or `Llama-3.2` will raise a `401 Unauthorized` or `GatedRepoError`. Access is usually granted within a few minutes after submitting the form.
 
 ### 3. Run the pipeline
 
