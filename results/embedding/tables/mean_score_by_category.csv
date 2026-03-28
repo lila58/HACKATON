@@ -1,0 +1,14 @@
+SemanticCategory,mean_score
+violent_crime,0.6713
+abuse_hate_harassment,0.6189125
+fraud_financial_crime,0.615765
+illegal,0.6062112068965517
+copyright,0.6032224025974026
+weapons_explosives,0.60045
+harassment_bullying,0.5969833333333333
+cybercrime_intrusion,0.5823546875
+cybercrime,0.5718178571428572
+drugs_selfharm_or_weapons,0.559375
+chemical_biological,0.5571370967741937
+misinformation_disinformation,0.5463027027027028
+harmful,0.5097181818181818

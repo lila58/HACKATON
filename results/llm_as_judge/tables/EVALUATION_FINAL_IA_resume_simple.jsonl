@@ -1,0 +1,6 @@
+{"Modèle":"Phi 3.5","Score moyen":1.4836065574,"Taux d'échec (%)":25.4098360656}
+{"Modèle":"Qwen 2.5","Score moyen":1.2459016393,"Taux d'échec (%)":23.7704918033}
+{"Modèle":"Llama 3.2","Score moyen":0.7459016393,"Taux d'échec (%)":14.7540983607}
+{"Modèle":"Phi-4-mini-instruct","Score moyen":1.6721311475,"Taux d'échec (%)":31.1475409836}
+{"Modèle":"gemma-7b-it","Score moyen":1.7786885246,"Taux d'échec (%)":34.4262295082}
+{"Modèle":"Mistral-7B-v0.3","Score moyen":1.8442622951,"Taux d'échec (%)":36.0655737705}

@@ -1,0 +1,5 @@
+model,n,mean_score
+Qwen/Qwen2.5-1.5B-Instruct,247,0.8247732793522267
+microsoft/Phi-4-mini-instruct,247,0.7286724696356276
+mistralai/Mistral-7B-v0.3,247,0.39247894736842104
+google/gemma-7b-it,247,0.38004493927125504

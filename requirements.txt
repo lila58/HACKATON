@@ -1,0 +1,20 @@
+# Core ML / NLP
+torch>=2.0.0
+transformers>=4.38.0
+sentence-transformers>=2.6.0
+huggingface_hub>=0.21.0
+
+# LLM judge (local inference)
+llama-cpp-python>=0.2.50
+
+# Data handling
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
+
+# Elasticsearch
+elasticsearch>=8.0.0
+
+# Notebooks
+jupyter>=1.0.0
+ipykernel>=6.0.0

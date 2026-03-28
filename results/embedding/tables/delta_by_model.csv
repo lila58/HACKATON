@@ -1,0 +1,5 @@
+model,delta_score
+mistralai/Mistral-7B-v0.3,0.065332
+google/gemma-7b-it,-0.061194000000000005
+microsoft/Phi-4-mini-instruct,-0.062392
+Qwen/Qwen2.5-1.5B-Instruct,-0.31541600000000003
