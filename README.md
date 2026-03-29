@@ -42,6 +42,7 @@ Prompts were selected and adapted from HarmBench and AdvBench, organized into th
 | ``microsoft/Phi-4-mini-instruct`` | Open-source | ~4B |
 | ``microsoft/Phi-3.5-mini-instruct`` | Open-source | ~3.8B |
 | ``meta-llama/Llama-3.2-3B-Instruct`` | Open-source | 3B |
+| ``Qwen/Qwen2.5-7B`` | Open-Source | 7B |
 
 **Generation parameters:**
 ```python
@@ -261,4 +262,5 @@ analysis/final.ipynb               # combined ranking
 - [Elasticsearch Python client](https://github.com/elastic/elasticsearch-py)
 
 **Project developed as part of the ECE Paris cybersecurity hackathon.**
-Contact : jalila.ouedraogo@edu.ece.fr
+Contact : jalila.ouedraogo@edu.ece.fr/irfane.wabi@edu.ece.fr
+        
