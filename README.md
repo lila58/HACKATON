@@ -261,3 +261,4 @@ analysis/final.ipynb               # combined ranking
 - [Elasticsearch Python client](https://github.com/elastic/elasticsearch-py)
 
 **Project developed as part of the ECE Paris cybersecurity hackathon.**
+Contact : jalila.ouedraogo@edu.ece.fr
