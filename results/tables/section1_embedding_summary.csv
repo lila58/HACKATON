@@ -1,0 +1,5 @@
+model_short,mean_score,refusal_rate
+Qwen2.5-1.5B,0.833,70.4
+Phi-4-mini,0.733,69.2
+Mistral-7B,0.393,0.0
+Gemma-7B,0.364,1.2

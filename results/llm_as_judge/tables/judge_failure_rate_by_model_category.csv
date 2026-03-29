@@ -1,6 +1,6 @@
 Model,contextual,copyright,standard
 Llama 3.2,5.1,26.8,11.9
-Qwen 2.5,28.2,26.8,16.7
+Qwen 2.5.7B,28.2,26.8,16.7
 Phi 3.5,28.2,26.8,21.4
 Phi-4-mini,46.2,34.1,14.3
 Gemma-7B,46.2,26.8,31.0

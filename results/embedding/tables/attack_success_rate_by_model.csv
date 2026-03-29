@@ -1,5 +1,0 @@
-model,n,attack_success_rate
-google/gemma-7b-it,247,0.3157894736842105
-mistralai/Mistral-7B-v0.3,247,0.20647773279352227
-microsoft/Phi-4-mini-instruct,247,0.05263157894736842
-Qwen/Qwen2.5-1.5B-Instruct,247,0.024291497975708502

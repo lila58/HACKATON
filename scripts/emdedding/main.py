@@ -1,3 +1,16 @@
+# =============================================================================
+# main.py — Embedding-based safety scoring pipeline
+#
+# Pipeline:
+#   1. Load model outputs (JSONL) and harmful reference targets
+#   2. Encode all target variants with the sentence-transformer model
+#   3. Score each response using semantic similarity + rule-based signals
+#   4. Fuse results:
+#      - standard / copyright: single response scored directly
+#      - contextual: paired (no_context vs with_context) → context_resistance
+#   5. Save final scored results to RESULTS_PATH
+# =============================================================================
+
 import json
 from collections import defaultdict
 
@@ -8,22 +21,27 @@ import utils
 import scoring
 
 
+# --- 1. Load raw data ---
 print("Loading files...")
 outputs = utils.load_jsonl(config.MODEL_OUTPUTS_PATH)
 targets = utils.load_jsonl(config.TARGETS_PATH)
 
+# --- 2. Encode reference targets ---
+# Each target has multiple text variants; all are encoded and stored as a
+# matrix of shape (n_variants, embedding_dim) for worst-case scoring.
 print("Loading embedding model...")
 embedder = SentenceTransformer(config.EMBEDDING_MODEL_NAME)
 
 print("Encoding targets...")
-# On encode toutes les variantes de chaque target et on stocke tous les vecteurs
 target_embeddings = {}
 for item in targets:
     tid = item["target_id"]
     texts = [utils.normalize_text(t) for t in item["target_texts"]]
     vecs = embedder.encode(texts, convert_to_numpy=True)
-    target_embeddings[tid] = vecs  # shape: (n_variantes, dim)
+    target_embeddings[tid] = vecs  # shape: (n_variants, dim)
 
+# --- 3. Score each response ---
+# Skips entries with missing BehaviorID, empty response, or no matching target.
 print("Scoring raw responses...")
 scored_rows = []
 
@@ -54,6 +72,8 @@ for item in outputs:
         **local_scores,
     })
 
+# --- 4. Fuse results by category ---
+# Group rows by (model, BehaviorID, category) to handle contextual pairs.
 print("Building fused output...")
 grouped = defaultdict(list)
 for row in scored_rows:
@@ -63,6 +83,8 @@ for row in scored_rows:
 final_results = []
 
 for (_, _, category), rows in grouped.items():
+
+    # Standard and copyright prompts: single row, scored directly.
     if category != "contextual":
         row = rows[0]
         final_results.append({
@@ -85,6 +107,8 @@ for (_, _, category), rows in grouped.items():
         })
         continue
 
+    # Contextual prompts: expect a pair (no_context baseline + with_context).
+    # The presence of a non-empty "context" field identifies the injected variant.
     base_row = None
     context_row = None
 
@@ -94,10 +118,12 @@ for (_, _, category), rows in grouped.items():
         else:
             base_row = row
 
+    # Skip incomplete pairs (missing one of the two variants).
     if base_row is None or context_row is None:
-        # si la paire n'est pas complète, on l'ignore ou on peut garder une trace d'erreur
         continue
 
+    # Compute context resistance: measures how much the injected context
+    # degrades safety compared to the no-context baseline.
     context_resistance = scoring.compute_context_resistance_from_pair(
         harm_base=base_row["harm"],
         harm_context=context_row["harm"],
@@ -130,6 +156,7 @@ for (_, _, category), rows in grouped.items():
         "label": scoring.label_contextual(context_resistance),
     })
 
+# --- 5. Save final results ---
 print("Saving fused results...")
 with open(config.RESULTS_PATH, "w", encoding="utf-8") as f:
     json.dump({"results": final_results}, f, indent=2, ensure_ascii=False)

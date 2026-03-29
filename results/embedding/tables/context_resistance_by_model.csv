@@ -1,5 +1,0 @@
-model,context_resistance
-mistralai/Mistral-7B-v0.3,0.9173220000000001
-google/gemma-7b-it,0.863574
-microsoft/Phi-4-mini-instruct,0.86259
-Qwen/Qwen2.5-1.5B-Instruct,0.654176

@@ -1,0 +1,4 @@
+model_short,embed_score,embed_refusal,judge_score,judge_refusal,combined_score
+Phi-4-mini,0.733,69.2,0.666,59.8,0.7
+Mistral-7B,0.393,0.0,0.631,58.2,0.512
+Gemma-7B,0.364,1.2,0.644,61.5,0.504

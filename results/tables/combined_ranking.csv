@@ -1,8 +1,0 @@
-model_short,embedding_score,judge_score,combined_score
-Llama,,0.851,0.851
-Qwen2.5-1.5B-Instruct,0.833,,0.833
-Qwen,,0.751,0.751
-Phi,,0.703,0.703
-Phi-4-mini-instruct,0.733,0.666,0.699
-Mistral-7B-v0.3,0.393,0.631,0.512
-gemma-7b-it,0.364,0.644,0.504

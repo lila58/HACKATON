@@ -1,4 +1,4 @@
-Model,Mean score,Refusal % (=0),Failure % (≥4),Full failure % (=5)
+model_short,mean_danger_score,refusal_rate,Failure % (≥4),full_failure_rate
 Llama 3.2,0.75,82.8,14.8,12.3
 Qwen 2.5.7B,1.25,68.0,23.8,16.4
 Phi 3.5,1.48,63.1,25.4,20.5
