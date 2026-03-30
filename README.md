@@ -22,7 +22,7 @@
 |---|---|
 | ``prompts.jsonl`` | 297 prompts sent to the models |
 | ``targets.jsonl`` | Harmful target responses (for embedding scoring) |
-| ``prompts_for_judge.jsonl`` | Prompts reformatted for the LLM judge |
+| ``prompts_for_judge.jsonl`` | 122 Prompts reformatted for the LLM judge |
 
 **Construction methodology:**
 Prompts were selected and adapted from HarmBench and AdvBench, organized into three types: ``standard``, ``contextual`` (prompt enriched with a realistic context), and ``copyright``.
@@ -65,10 +65,10 @@ Each model's chat template is applied via `tokenizer.apply_chat_template()` befo
 
 | Model | Mean score | Refusal rate |
 |---|---|---|
-| Phi-4-mini-instruct | — | — |
-| Qwen2.5-1.5B-Instruct | — | — |
-| Mistral-7B-v0.3 | — | — |
-| Gemma-7b-it | — | — |
+| Phi-4-mini-instruct | 0.8333 | 70.4% |
+| Qwen2.5-1.5B-Instruct | 0.733 | 69.2% |
+| Mistral-7B-v0.3 | 0.393 | 0% |
+| Gemma-7b-it | 0.364 | 1.2% |
 
 *Run ``analysis/stats_analysis.ipynb`` to fill this table.*
 
@@ -248,6 +248,48 @@ analysis/final.ipynb               # combined ranking
 | Combined ranking | ``results/tables/combined_ranking.csv`` |
 
 ---
+## ELK Stack (Elasticsearch + Kibana)
+
+To support data exploration and visualization, this project uses an ELK stack composed of Elasticsearch and Kibana.
+
+### Overview
+
+- **Elasticsearch** is used to store and index the evaluation results.
+- **Kibana** is used to visualize and analyze these results through dashboards and graphs.
+
+The pipeline is the following:
+
+1. Experimental results are generated and saved as JSON/JSONL files.
+2. A Python script indexes these results into Elasticsearch.
+3. Kibana is used to explore and visualize the indexed data.
+
+---
+
+### Running ELK with Docker
+
+You can start Elasticsearch and Kibana using Docker Compose:
+
+bash
+docker-compose up -d
+### Alternative: Import Results Directly into Kibana
+
+Instead of running the full indexing pipeline, it is also possible to directly import result files into Kibana.
+
+Kibana allows you to upload structured files (such as CSV or JSON) and explore them without using a custom indexing script.
+
+#### Steps:
+
+1. Open Kibana at: http://localhost:5601  
+2. Go to **"Stack Management" → "Data Views"** or **"Upload File"**  (You can also find upload file in "Home")
+3. Upload your results file (CSV or JSON) from the `/results/` folder  
+4. Configure the fields (if needed)  
+5. Create a data view (index pattern)  
+6. Explore your data in **Discover** or create visualizations
+
+#### Notes:
+
+- This method is useful for quick exploration or if you do not want to run the full pipeline.
+- However, using the provided Python script ensures a more controlled and reproducible indexing process.
 
 ## G. Credits
 
