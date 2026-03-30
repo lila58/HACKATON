@@ -125,6 +125,7 @@ Hackaton/
     ├── model.py                      # Generates responses from Hugging Face models
     ├── evaluation/
     │   └── LLM_as_a_judge.py         # Evaluates responses with a local LLM judge (llama-cpp)
+    ├── send_to_elk.py                # Send data to kibana for visualisation  
     └── emdedding/
         ├── config.py                 # Paths and configuration parameters
         ├── main.py                   # Entry point for the embedding scoring pipeline
